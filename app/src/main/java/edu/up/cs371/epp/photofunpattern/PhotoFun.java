@@ -88,6 +88,7 @@ public class PhotoFun extends AppCompatActivity {
         public void onClick(View button) {
             WestEdgeFilter filter = new WestEdgeFilter();
             myNewImageView.setImageBitmap(filter.apply(myOriginalBmp));
+            //test
         }
     }
 
