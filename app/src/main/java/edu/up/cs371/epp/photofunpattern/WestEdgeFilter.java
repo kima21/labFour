@@ -47,3 +47,4 @@ public class WestEdgeFilter extends PhotoFilter {
 
 
 }
+//Team one added the XLM files and team two put the photos into drawable. Team one and team two were the same team.
