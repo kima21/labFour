@@ -28,47 +28,22 @@ public class WestEdgeFilter extends PhotoFilter {
     * @param inPixel is a 32 bit pixel that contains RGB color values
     * @return a new Pixel in which each of the RGB components has been increased
     */
-    public int transformPixel(int onePixel, int twoPixel, int threePixel, int fourPixel,
-                              int fivePixel, int sixPixel, int sevenPixel, int eightPixel,
-                              int ninePixel) {
 
-        int red = constrain(Color.red(fourPixel) + ADJUSTMENT);
-        int green = constrain(Color.green(fourPixel) + ADJUSTMENT);
-        int blue = constrain(Color.blue(fourPixel) + ADJUSTMENT);
-        int outPixel = Color.argb(Color.alpha(fourPixel), red, green, blue);
+    public int transformPixel(int onePixel, int twoPixel, int threePixel,int fourPixel, int fivePixel,
+                              int sixPixel, int sevenPixel, int eightPixel, int ninePixel) {
 
-        return outPixel;
+        int red = constrain(Color.red(onePixel) + Color.red(twoPixel) + (Color.red(threePixel)*-1)
+                + Color.red(fourPixel) + (Color.red(fivePixel)*-2) + (Color.red(sixPixel)*-1)
+                + Color.red(sevenPixel) + Color.red(eightPixel) + (Color.red(ninePixel)*-1));
+        int green = constrain(Color.green(onePixel) + Color.green(twoPixel) + (Color.green(threePixel)*-1)
+                + Color.green(fourPixel) + (Color.green(fivePixel)*-2) + (Color.green(sixPixel)*-1)
+                + Color.green(sevenPixel) + Color.green(eightPixel) + (Color.green(ninePixel)*-1));
+        int blue = constrain(Color.blue(onePixel) + Color.blue(twoPixel) + (Color.blue(threePixel)*-1)
+                + Color.blue(fourPixel) + (Color.blue(fivePixel)*-2) + (Color.blue(sixPixel)*-1)
+                + Color.blue(sevenPixel) + Color.blue(eightPixel) + (Color.blue(ninePixel)*-1));
 
+        return Color.argb(Color.alpha(fivePixel), red, green, blue);
     }
 
-    @Override
-    public Bitmap apply(Bitmap inBmp) {
-        super.apply(inBmp);
-        int width = inBmp.getWidth();
-        int height = inBmp.getHeight();
 
-        Bitmap newBmp = Bitmap.createBitmap(width, height, inBmp.getConfig());
-
-        for (int w = 1; w < width-1; w++) {
-            for (int h = 1; h < height-1; h++) {
-                int onePixel = inBmp.getPixel(w-1,h-1);
-                int twoPixel = inBmp.getPixel(w,h-1);
-                int threePixel = inBmp.getPixel(w+1,h-1);
-                int fourPixel = inBmp.getPixel(w-1,h);
-                int fivePixel = inBmp.getPixel(w,h);
-                int sixPixel = inBmp.getPixel(w+1,h);
-                int sevenPixel = inBmp.getPixel(w-1,h+1);
-                int eightPixel = inBmp.getPixel(w,h+1);
-                int ninePixel = inBmp.getPixel(w+1,h+1);
-
-
-
-                int outPixel = transformPixel(onePixel, twoPixel, threePixel, fourPixel,
-                        fivePixel, sixPixel, sevenPixel, eightPixel, ninePixel);
-                newBmp.setPixel(w, h, outPixel);
-            }
-        }
-        return newBmp;
-
-    }
 }

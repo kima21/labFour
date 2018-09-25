@@ -29,13 +29,27 @@ public class SmoothFilter extends PhotoFilter {
     public int transformPixel(int onePixel, int twoPixel, int threePixel,int fourPixel, int fivePixel,
                               int sixPixel, int sevenPixel, int eightPixel, int ninePixel) {
 
+        int red = constrain((Color.red(onePixel)/10) + (Color.red(twoPixel)/10) + (Color.red(threePixel)/10) + (Color.red(fourPixel)/10)
+                + (Color.red(fivePixel)/5) + (Color.red(sixPixel)/10) + (Color.red(sevenPixel)/10) + (Color.red(eightPixel)/10) + (Color.red(ninePixel)/10));
+        int green = constrain((Color.green(onePixel)/10) + (Color.green(twoPixel)/10) + (Color.green(threePixel)/10) + (Color.green(fourPixel)/10)
+                + (Color.green(fivePixel)/5) + (Color.green(sixPixel)/10) + (Color.green(sevenPixel)/10) + (Color.green(eightPixel)/10) + (Color.green(ninePixel)/10));
+        int blue = constrain((Color.blue(onePixel)/10) + (Color.blue(twoPixel)/10) + (Color.blue(threePixel)/10) + (Color.blue(fourPixel)/10)
+                + (Color.red(fivePixel)/5) + (Color.blue(sixPixel)/10) + (Color.blue(sevenPixel)/10) + (Color.blue(eightPixel)/10) + (Color.blue(ninePixel)/10));
 
-        int intensity = (Color.red(fivePixel) + Color.green(fivePixel) +
-                Color.blue(fivePixel)) / 3;
-        return Color.argb(Color.alpha(fivePixel), intensity,intensity,intensity);
+        return Color.argb(Color.alpha(fivePixel), red, green, blue);
+
+
+
 
 
         /**
+         *
+         *
+         int intensity = (Color.red(fivePixel) + Color.green(fivePixel) +
+         Color.blue(fivePixel)) / 3;
+         return Color.argb(Color.alpha(fivePixel), intensity,intensity,intensity);
+
+
          int blue = constrain(Color.blue(onePixel) + (Color.blue(twoPixel)*(1/10)) + (Color.blue(threePixel)*(1/10))
          + (Color.blue(fourPixel)*(1/10)) + (Color.blue(fivePixel)*(1/5)) + (Color.blue(sixPixel)*(1/10))
          + (Color.blue(sevenPixel)*(1/10)) + (Color.blue(eightPixel)*(1/10)) + Color.blue(ninePixel)*(1/10));
@@ -60,6 +74,8 @@ public class SmoothFilter extends PhotoFilter {
          */
 
     }
+
+    /**
     @Override
     public Bitmap apply(Bitmap inBmp) {
         super.apply(inBmp);
@@ -87,5 +103,7 @@ public class SmoothFilter extends PhotoFilter {
         return newBmp;
 
     }
+    */
+
 
 }
