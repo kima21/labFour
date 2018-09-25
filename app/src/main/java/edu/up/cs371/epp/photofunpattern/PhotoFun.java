@@ -99,7 +99,7 @@ public class PhotoFun extends AppCompatActivity {
 
         Spinner spinner = (Spinner) findViewById(R.id.spinnerPic);
         myImageNames =
-                getResources().getStringArray(R.drawable.imageNames);
+                getResources().getStringArray(R.array.imageNames);
         ArrayAdapter adapter = new ArrayAdapter<String> (this,
                 android.R.layout.simple_list_item_1,
                 android.R.id.text1,
@@ -116,7 +116,7 @@ public class PhotoFun extends AppCompatActivity {
     private void initImageArray (){
         myImageBmps = new ArrayList<Bitmap>();
         TypedArray imageIds =
-                getResources().obtainTypedArray(R.drawable.imageIdArray);
+                getResources().obtainTypedArray(R.array.imageIdArray);
 
         for (int i=0; i<myImageNames.length; i++) {
             int id = imageIds.getResourceId(i, 0);
